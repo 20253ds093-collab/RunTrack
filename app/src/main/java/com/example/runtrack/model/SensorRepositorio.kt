@@ -11,7 +11,7 @@ class SensorRepositorio(context: Context) {
 
     private val sensorManager =
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
+   // regresa null si el dispositivo no tiene ese sensor
     private val acelerometro: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     private val giroscopio: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
 
@@ -31,15 +31,14 @@ class SensorRepositorio(context: Context) {
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-                // No se necesita en esta practica
             }
         }
-
+        // para actualizar la pantalla
         acelerometro?.let { sensorManager.registerListener(escucha, it, SensorManager.SENSOR_DELAY_UI) }
         giroscopio?.let { sensorManager.registerListener(escucha, it, SensorManager.SENSOR_DELAY_UI) }
         listener = escucha
     }
-
+//apaga
     fun detener() {
         listener?.let { sensorManager.unregisterListener(it) }
         listener = null

@@ -25,12 +25,12 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
+// se apaga el sensor al salir de la app
     override fun onPause() {
         super.onPause()
         viewModel.alPausar()
     }
-
+// se activa al regresar
     override fun onResume() {
         super.onResume()
         viewModel.alReanudar()
